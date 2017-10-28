@@ -33,9 +33,32 @@ def remove_adjacent(nums):
 # Ideally, the solution should work in "linear" time, making a single
 # pass of both lists.
 def linear_merge(list1, list2):
-    list3 = list1 + list2
-    list3.sort()
-    return list3
+    mergedlist = list()
+
+    i = j = 0
+
+    total = len(list1) + len(list2)
+
+    while len(mergedlist) != total:
+        # Reach the end of list1
+        if len(list1) == i:
+            mergedlist += list2[j:]
+            break
+        # Reach the end of list2
+        elif len(list2) == j:
+            mergedlist += list1[i:]
+        elif list1[i] < list2[j]:
+            mergedlist.append(list1[i])
+            i += 1
+        else:
+            mergedlist.append(list2[j])
+            j += 1
+
+    return mergedlist
+
+    ###2 Solution based on lib
+    # from heapq import merge
+    # return list(merge(list1, list2))
 
 
 # Note: the solution above is kind of cute, but unfortunately list.pop(0)
